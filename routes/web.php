@@ -1,6 +1,12 @@
 <?php
 
+use App\Models\Obat;
+use App\Models\User;
+use App\Models\Kategori;
+use App\Models\Supplier;
+use App\Models\UserProfile;
 use Illuminate\Support\Facades\Route;
+use Illuminate\Support\Facades\Redirect;
 
 /*
 |--------------------------------------------------------------------------
@@ -25,6 +31,8 @@ require __DIR__ . '/auth.php';
 
 Route::middleware('auth')->group(function () {
     Route::get('/', function () {
-        return view('welcome');
+        return view('dashboard-app');
+        // return redirect()->to('dashboard');
+        // return dd(Obat::where('satuan', '=', 'vitamin')->get());
     });
 });

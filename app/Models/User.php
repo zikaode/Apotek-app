@@ -3,6 +3,11 @@
 namespace App\Models;
 
 // use Illuminate\Contracts\Auth\MustVerifyEmail;
+use App\Models\Pembelian;
+use App\Models\Penjualan;
+use App\Models\UserProfile;
+use Laravel\Sanctum\HasApiTokens;
+use Illuminate\Notifications\Notifiable;
 use Illuminate\Database\Eloquent\Factories\HasFactory;
 use Illuminate\Foundation\Auth\User as Authenticatable;
 
@@ -39,4 +44,17 @@ class User extends Authenticatable
     protected $casts = [
         'email_verified_at' => 'datetime',
     ];
+
+    public function user_profile()
+    {
+        return $this->belongsTo(UserProfile::class);
+    }
+    public function penjualan()
+    {
+        return $this->hasMany(Penjualan::class);
+    }
+    public function pembelian()
+    {
+        return $this->hasMany(Pembelian::class);
+    }
 }

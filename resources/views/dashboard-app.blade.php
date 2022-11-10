@@ -1,0 +1,12 @@
+@extends('layouts.main')
+@section('Content')
+    TEST
+@endsection
+@section('Model')
+@endsection
+@push('style')
+    <style></style>
+@endpush
+@push('script')
+    <script></script>
+@endpush
