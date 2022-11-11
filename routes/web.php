@@ -5,6 +5,7 @@ use App\Models\User;
 use App\Models\Kategori;
 use App\Models\Supplier;
 use App\Models\UserProfile;
+use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Route;
 use Illuminate\Support\Facades\Redirect;
 
@@ -23,16 +24,26 @@ use Illuminate\Support\Facades\Redirect;
 //     return view('index');
 // });
 
-Route::get('/dashboard', function () {
-    return view('dashboard');
-})->middleware(['auth', 'verified'])->name('dashboard');
+// Route::get('/dashboard', function () {
+//     return view('dashboard');
+// })->middleware(['auth', 'verified'])->name('dashboard');
 
 require __DIR__ . '/auth.php';
 
 Route::middleware('auth')->group(function () {
     Route::get('/', function () {
         return view('dashboard-app');
-        // return redirect()->to('dashboard');
+        // return dd(Route::current());
         // return dd(Obat::where('satuan', '=', 'vitamin')->get());
-    });
+    })->name('dashboard');
+    Route::get('/penjualan', function () {
+        return view('dashboard-app');
+        // return dd(Route::current());
+        // return dd(Obat::where('satuan', '=', 'vitamin')->get());
+    })->name('penjualan');
+    Route::get('/pembelian', function () {
+        return view('dashboard-app');
+        // return dd(Route::current());
+        // return dd(Obat::where('satuan', '=', 'vitamin')->get());
+    })->name('pembelian');
 });

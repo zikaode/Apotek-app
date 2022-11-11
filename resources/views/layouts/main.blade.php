@@ -49,8 +49,8 @@
             <hr class="sidebar-divider my-0">
 
             <!-- Nav Item - Dashboard -->
-            <li class="nav-item active">
-                <a class="nav-link" href="#">
+            <li class="nav-item {{ Route::current()->action['as'] == 'dashboard' ? 'active' : '' }}">
+                <a class="nav-link" href="/">
                     <!-- <i class="fas fa-fw fa-tachometer-alt"></i> -->
                     <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" fill="currentColor"
                         class="bi bi-speedometer2 mr-1" viewBox="0 0 16 16">
@@ -94,7 +94,8 @@
             </li>
 
             <!-- Nav Item - Utilities Collapse Menu -->
-            <li class="nav-item">
+            <li
+                class="nav-item {{ (Route::current()->action['as'] == 'penjualan' or Route::current()->action['as'] == 'pembelian') ? 'active' : '' }}">
                 <a class="nav-link collapsed" href="#" data-toggle="collapse" data-target="#collapseUtilities"
                     aria-expanded="true" aria-controls="collapseUtilities">
                     <!-- <i class="fas fa-fw fa-wrench"></i> -->
@@ -105,12 +106,15 @@
                     </svg>
                     <span>Transaksi</span>
                 </a>
-                <div id="collapseUtilities" class="collapse" aria-labelledby="headingUtilities"
-                    data-parent="#accordionSidebar">
+                <div id="collapseUtilities"
+                    class="collapse {{ (Route::current()->action['as'] == 'penjualan' or Route::current()->action['as'] == 'pembelian') ? 'show' : '' }}"
+                    aria-labelledby="headingUtilities" data-parent="#accordionSidebar">
                     <div class="bg-white py-2 collapse-inner rounded">
                         <!-- <h6 class="collapse-header">Custom Utilities:</h6> -->
-                        <a class="collapse-item" href="#">Penjualan - kasir</a>
-                        <a class="collapse-item" href="#">Pembelian</a>
+                        <a class="collapse-item {{ Route::current()->action['as'] == 'penjualan' ? 'active text-danger' : '' }}"
+                            href="penjualan">Penjualan - kasir</a>
+                        <a class="collapse-item {{ Route::current()->action['as'] == 'pembelian' ? 'active text-danger' : '' }}"
+                            href="pembelian">Pembelian</a>
                     </div>
                 </div>
             </li>
