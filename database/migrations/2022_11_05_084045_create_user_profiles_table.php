@@ -15,9 +15,8 @@ return new class extends Migration
     {
         Schema::create('user_profiles', function (Blueprint $table) {
             $table->increments('id');
-            $table->string('nama');
-            $table->string('alamat');
-            $table->string('no_telp');
+            $table->string('alamat')->default('not-set');
+            $table->string('no_telp')->default('not-set');
             $table->date('tanggal_lahir');
             $table->enum('jenis_kelamin', ['P', 'L']);
             $table->timestamps();

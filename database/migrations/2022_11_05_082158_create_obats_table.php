@@ -17,14 +17,19 @@ return new class extends Migration
     {
         Schema::create('obats', function (Blueprint $table) {
             $table->increments('id');
+            $table->string('kode')->unique();
             $table->string('nama');
+            $table->string('jenis');
             $table->string('satuan');
             $table->unsignedInteger('maximum')->unsigned();
             $table->unsignedInteger('minimum')->unsigned();
             $table->unsignedInteger('stok')->unsigned();
             $table->unsignedInteger('harga_beli')->unsigned();
             $table->unsignedInteger('harga_jual')->unsigned();
+            $table->tinyInteger('ppn')->unsigned();
+            $table->tinyInteger('margin')->unsigned();
             $table->date('expired');
+            $table->string('info')->nullable();
             $table->foreignIdFor(Supplier::class);
             $table->foreignIdFor(Kategori::class);
             $table->timestamps();

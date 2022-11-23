@@ -19,7 +19,8 @@ return new class extends Migration
             $table->string('alamat');
             $table->string('no_telp');
             $table->string('info')->defalut('Tidak Ada Info')->nullable();
-            $table->string('satuan_obat');
+            $table->string('jenis_obat');
+            $table->string('pengaturan')->default('opname:true;obat:true');
             $table->timestamps();
         });
     }

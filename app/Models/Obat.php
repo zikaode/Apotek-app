@@ -11,13 +11,20 @@ class Obat extends Model
 {
     use HasFactory;
     protected $fillable = [
+        'kode',
         'nama',
-        'maximum',
-        'minimum',
-        'stok',
-        'harga_beli',
-        'harga_jual',
+        'jenis',
+        'kategori_id',
+        'supplier_id',
         'expired',
+        'stok',
+        'minimum',
+        'maximum',
+        'satuan',
+        'ppn',
+        'margin',
+        'harga_beli',
+        'harga_jual'
     ];
     public function opname()
     {

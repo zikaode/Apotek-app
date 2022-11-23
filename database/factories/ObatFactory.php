@@ -18,11 +18,11 @@ class ObatFactory extends Factory
      */
     public function definition()
     {
-        $satuan = explode(';', (Apotek::find(1)->satuan_obat));
+        $jenis = explode(';', (Apotek::find(1)->jenis_obat));
         $temp_harga = (random_int(10, 250));
         return [
             'nama' => fake()->word(),
-            'satuan' => $satuan[random_int(0, 2)],
+            'jenis' => $jenis[random_int(0, 2)],
             'maximum' => random_int(30, 50),
             'minimum' => 10,
             'stok' => random_int(20, 30),
@@ -31,6 +31,10 @@ class ObatFactory extends Factory
             'supplier_id' => 1,
             'kategori_id' => 1,
             'expired' => fake()->date(),
+            'kode' => fake()->word(),
+            'margin' => 20,
+            'ppn' => 11,
+            'satuan' => fake()->word(),
         ];
     }
 }

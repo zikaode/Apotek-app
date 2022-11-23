@@ -25,7 +25,6 @@ class DatabaseSeeder extends Seeder
         // \App\Models\User::factory(10)->create();
 
         $id = UserProfile::create([
-            'nama' => 'Dzikri Arraiyan',
             'alamat' => 'Mongeudong',
             'no_telp' => '081201010101',
             'tanggal_lahir' => '2002-07-11',
@@ -35,6 +34,7 @@ class DatabaseSeeder extends Seeder
             'name' => 'Dzikri Arraiyan',
             'email' => 'test@example.com',
             'email_verified_at' => now(),
+            'level' => 'admin',
             'password' => Hash::make('Admin123'),
             'remember_token' => Str::random(10),
             'user_profile_id' => $id->id,
@@ -53,7 +53,7 @@ class DatabaseSeeder extends Seeder
             'nama' => 'Apotek Dzikri',
             'alamat' => 'Mongeudong',
             'no_telp' => '182048',
-            'satuan_obat' => 'obat;vitamin;susu'
+            'jenis_obat' => 'obat;vitamin;susu'
         ]);
 
         \App\Models\Obat::factory(10)->create();

@@ -13,6 +13,7 @@ class Apotek extends Model
         'alamat',
         'no_telp',
         'info',
-        'satuan_obat'
+        'jenis_obat',
+        'pengaturan'
     ];
 }

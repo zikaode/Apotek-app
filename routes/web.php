@@ -7,7 +7,10 @@ use App\Models\Supplier;
 use App\Models\UserProfile;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Route;
+use App\Http\Controllers\ObatController;
+use App\Http\Controllers\UserController;
 use Illuminate\Support\Facades\Redirect;
+use App\Http\Controllers\PengaturanController;
 
 /*
 |--------------------------------------------------------------------------
@@ -46,4 +49,48 @@ Route::middleware('auth')->group(function () {
         // return dd(Route::current());
         // return dd(Obat::where('satuan', '=', 'vitamin')->get());
     })->name('pembelian');
+    Route::get(
+        '/user',
+        [UserController::class, 'index']
+    )->name('user');
+    Route::post(
+        '/user/add',
+        [UserController::class, 'store']
+    )->name('user.add');
+    Route::post(
+        '/user/delete',
+        [UserController::class, 'destroy']
+    )->name('user.delete');
+    Route::get(
+        '/pengaturan',
+        [PengaturanController::class, 'index']
+    )->name('pengaturan');
+    Route::get(
+        '/obat',
+        [ObatController::class, 'index']
+    )->name('obat');
+    Route::post(
+        '/obat/add',
+        [ObatController::class, 'store']
+    )->name('obat.add');
+    Route::post(
+        '/obat/{obat}/edit',
+        [ObatController::class, 'update']
+    )->name('obat.update');
+    Route::get(
+        '/obat/{id?}/delete',
+        [ObatController::class, 'destroy']
+    )->name('obat.delete');
+    Route::get(
+        '/pengaturan/opname-edit',
+        [PengaturanController::class, 'opname']
+    )->name('pengaturan.opname');
+    Route::get(
+        '/pengaturan/obat-edit',
+        [PengaturanController::class, 'obat']
+    )->name('pengaturan.obat');
+    Route::post(
+        '/pengaturan/edit',
+        [PengaturanController::class, 'update']
+    )->name('pengaturan.edit');
 });

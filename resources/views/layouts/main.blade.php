@@ -50,7 +50,7 @@
 
             <!-- Nav Item - Dashboard -->
             <li class="nav-item {{ Route::current()->action['as'] == 'dashboard' ? 'active' : '' }}">
-                <a class="nav-link" href="/">
+                <a class="nav-link" href="{{ route('dashboard') }}">
                     <!-- <i class="fas fa-fw fa-tachometer-alt"></i> -->
                     <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" fill="currentColor"
                         class="bi bi-speedometer2 mr-1" viewBox="0 0 16 16">
@@ -83,10 +83,12 @@
                     </svg>
                     <span>Master Data</span>
                 </a>
-                <div id="collapseTwo" class="collapse" aria-labelledby="headingTwo" data-parent="#accordionSidebar">
+                <div id="collapseTwo" class="collapse {{ Route::current()->action['as'] == 'obat' ? 'show' : '' }}"
+                    aria-labelledby="headingTwo" data-parent="#accordionSidebar">
                     <div class="bg-white py-2 collapse-inner rounded">
                         <!-- <h6 class="collapse-header">Custom Components:</h6> -->
-                        <a class="collapse-item" href="#">Data Obat</a>
+                        <a class="collapse-item {{ Route::current()->action['as'] == 'obat' ? 'active text-danger' : '' }}"
+                            href="{{ route('obat') }}">Data Obat</a>
                         <a class="collapse-item" href="#">Data Supplier</a>
                         <a class="collapse-item" href="#">Data Kategori</a>
                     </div>
@@ -112,9 +114,9 @@
                     <div class="bg-white py-2 collapse-inner rounded">
                         <!-- <h6 class="collapse-header">Custom Utilities:</h6> -->
                         <a class="collapse-item {{ Route::current()->action['as'] == 'penjualan' ? 'active text-danger' : '' }}"
-                            href="penjualan">Penjualan - kasir</a>
+                            href="{{ route('penjualan') }}">Penjualan - kasir</a>
                         <a class="collapse-item {{ Route::current()->action['as'] == 'pembelian' ? 'active text-danger' : '' }}"
-                            href="pembelian">Pembelian</a>
+                            href="{{ route('pembelian') }}">Pembelian</a>
                     </div>
                 </div>
             </li>
@@ -154,8 +156,8 @@
             </li>
 
             <!-- Nav Item - Tables -->
-            <li class="nav-item">
-                <a class="nav-link" href="#">
+            <li class="nav-item {{ Route::current()->action['as'] == 'user' ? 'active' : '' }}">
+                <a class="nav-link" href="{{ route('user') }}">
                     <!-- <i class="fas fa-fw fa-table"></i> -->
                     <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" fill="currentColor"
                         class="bi bi-people mr-1" viewBox="0 0 16 16">
@@ -166,8 +168,8 @@
                 </a>
             </li>
 
-            <li class="nav-item">
-                <a class="nav-link" href="#">
+            <li class="nav-item {{ Route::current()->action['as'] == 'pengaturan' ? 'active' : '' }}">
+                <a class="nav-link" href="{{ Route('pengaturan') }}">
                     <!-- <i class="fas fa-fw fa-table"></i> -->
                     <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" fill="currentColor"
                         class="bi bi-gear mr-1" viewBox="0 0 16 16">
@@ -176,7 +178,7 @@
                         <path
                             d="M9.796 1.343c-.527-1.79-3.065-1.79-3.592 0l-.094.319a.873.873 0 0 1-1.255.52l-.292-.16c-1.64-.892-3.433.902-2.54 2.541l.159.292a.873.873 0 0 1-.52 1.255l-.319.094c-1.79.527-1.79 3.065 0 3.592l.319.094a.873.873 0 0 1 .52 1.255l-.16.292c-.892 1.64.901 3.434 2.541 2.54l.292-.159a.873.873 0 0 1 1.255.52l.094.319c.527 1.79 3.065 1.79 3.592 0l.094-.319a.873.873 0 0 1 1.255-.52l.292.16c1.64.893 3.434-.902 2.54-2.541l-.159-.292a.873.873 0 0 1 .52-1.255l.319-.094c1.79-.527 1.79-3.065 0-3.592l-.319-.094a.873.873 0 0 1-.52-1.255l.16-.292c.893-1.64-.902-3.433-2.541-2.54l-.292.159a.873.873 0 0 1-1.255-.52l-.094-.319zm-2.633.283c.246-.835 1.428-.835 1.674 0l.094.319a1.873 1.873 0 0 0 2.693 1.115l.291-.16c.764-.415 1.6.42 1.184 1.185l-.159.292a1.873 1.873 0 0 0 1.116 2.692l.318.094c.835.246.835 1.428 0 1.674l-.319.094a1.873 1.873 0 0 0-1.115 2.693l.16.291c.415.764-.42 1.6-1.185 1.184l-.291-.159a1.873 1.873 0 0 0-2.693 1.116l-.094.318c-.246.835-1.428.835-1.674 0l-.094-.319a1.873 1.873 0 0 0-2.692-1.115l-.292.16c-.764.415-1.6-.42-1.184-1.185l.159-.291A1.873 1.873 0 0 0 1.945 8.93l-.319-.094c-.835-.246-.835-1.428 0-1.674l.319-.094A1.873 1.873 0 0 0 3.06 4.377l-.16-.292c-.415-.764.42-1.6 1.185-1.184l.292.159a1.873 1.873 0 0 0 2.692-1.115l.094-.319z" />
                     </svg>
-                    <span>Setting</span>
+                    <span>Pengaturan</span>
                 </a>
             </li>
 
@@ -204,49 +206,32 @@
                     <button id="sidebarToggleTop" class="btn btn-link d-md-none rounded-circle mr-3">
                         <i class="fa fa-bars"></i>
                     </button>
-
-                    <!-- Topbar Search -->
-                    <form
-                        class="d-none d-sm-inline-block form-inline mr-auto ml-md-3 my-2 my-md-0 mw-100 navbar-search">
-                        <div class="input-group">
-                            <input type="text" class="form-control bg-light border-0 small"
-                                placeholder="Search In This Page, for..." aria-label="Search"
-                                aria-describedby="basic-addon2">
-                            <div class="input-group-append">
-                                <button class="btn btn-primary" type="button">
-                                    <i class="fas fa-search fa-sm"></i>
-                                </button>
+                    @if (Route::current()->action['as'] == 'obat')
+                        <div style="width: 1vw"></div>
+                        <form action="{{ route('obat') }}" method="GET"
+                            class="d-none d-sm-inline-block form-inline mr-auto ml-md-3 my-2 my-md-0 mw-100 navbar-search">
+                            <div class="input-group">
+                                <input type="text" class="form-control bg-light border-0 small"
+                                    placeholder="Cari Obat.." aria-label="Search" aria-describedby="basic-addon2"
+                                    name="search" value="{{ $search ? $search : '' }}">
+                                <div class="input-group-append">
+                                    <button class="btn btn-primary" type="submit">
+                                        <i class="fas fa-search fa-sm"></i>
+                                    </button>
+                                </div>
                             </div>
-                        </div>
-                    </form>
-
-                    <!-- Topbar Navbar -->
+                        </form>
+                    @endif
                     <ul class="navbar-nav ml-auto">
-
-                        <!-- Nav Item - User Information -->
                         <li class="nav-item dropdown no-arrow">
                             <a class="nav-link dropdown-toggle" href="#" id="userDropdown" role="button"
                                 data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
-                                <span class="mr-2 d-none d-lg-inline text-gray-600">Admin@exemple.com</span>
+                                <span class="mr-2 d-none d-lg-inline text-gray-600">{{ Auth::user()->email }}</span>
                                 <img class="img-profile rounded-circle"
                                     src={{ URL::asset('template/img/undraw_profile.svg') }}>
                             </a>
-                            <!-- Dropdown - User Information -->
                             <div class="dropdown-menu dropdown-menu-right shadow animated--grow-in"
                                 aria-labelledby="userDropdown">
-                                <!-- <a class="dropdown-item" href="#">
-                                    <i class="fas fa-user fa-sm fa-fw mr-2 text-gray-400"></i>
-                                    Profile
-                                </a>
-                                <a class="dropdown-item" href="#">
-                                    <i class="fas fa-cogs fa-sm fa-fw mr-2 text-gray-400"></i>
-                                    Settings
-                                </a>
-                                <a class="dropdown-item" href="#">
-                                    <i class="fas fa-list fa-sm fa-fw mr-2 text-gray-400"></i>
-                                    Activity Log
-                                </a>
-                                <div class="dropdown-divider"></div> -->
                                 <a class="dropdown-item" href="#" data-toggle="modal"
                                     data-target="#logoutModal">
                                     <i class="fas fa-sign-out-alt fa-sm fa-fw mr-2 text-gray-400"></i>
@@ -273,7 +258,7 @@
             <footer class="sticky-footer bg-white">
                 <div class="container my-auto">
                     <div class="copyright text-center my-auto">
-                        <span>Copyright &copy; Your Website 2021</span>
+                        <span>Copyright &copy; <a href="#">zikaode</a> - 2022</span>
                     </div>
                 </div>
             </footer>
@@ -289,7 +274,6 @@
     <a class="scroll-to-top rounded" href="#page-top">
         <i class="fas fa-angle-up"></i>
     </a>
-    @yield('Modal')
     <!-- Logout Modal-->
     <div class="modal fade" id="logoutModal" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel"
         aria-hidden="true">
@@ -317,23 +301,7 @@
             </div>
         </div>
     </div>
-
-    <!-- Bootstrap core JavaScript-->
-    <script src={{ URL::asset('template/vendor/jquery/jquery.min.js') }}></script>
-    <script src={{ URL::asset('template/vendor/bootstrap/js/bootstrap.bundle.min.js') }}></script>
-
-    <!-- Core plugin JavaScript-->
-    <script src={{ URL::asset('template/vendor/jquery-easing/jquery.easing.min.js') }}></script>
-
-    <!-- Custom scripts for all pages-->
-    <script src={{ URL::asset('template/js/sb-admin-2.min.js') }}></script>
-
-    <!-- Page level plugins -->
-    <script src={{ URL::asset('template/vendor/chart.js/Chart.min.js') }}></script>
-
-    <!-- Page level custom scripts -->
-    <script src={{ URL::asset('template/js/demo/chart-area-demo.js') }}></script>
-    <script src={{ URL::asset('template/js/demo/chart-pie-demo.js') }}></script>
+    @yield('Modal')
     @stack('script')
 </body>
 
