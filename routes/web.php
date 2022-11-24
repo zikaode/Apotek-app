@@ -8,6 +8,7 @@ use App\Models\UserProfile;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Route;
 use App\Http\Controllers\ObatController;
+use App\Http\Controllers\TestController;
 use App\Http\Controllers\UserController;
 use Illuminate\Support\Facades\Redirect;
 use App\Http\Controllers\PengaturanController;
@@ -94,3 +95,5 @@ Route::middleware('auth')->group(function () {
         [PengaturanController::class, 'update']
     )->name('pengaturan.edit');
 });
+
+// Route::get('/test', [TestController::class, 'index']);
