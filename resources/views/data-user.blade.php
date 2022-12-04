@@ -62,7 +62,7 @@
                                         <div style="display: flex; gap:0.5rem; justify-content: start;">
                                             <span class="badge text-bg-primary p-2"><a
                                                     style="text-decoration: none; color:white" role="button"
-                                                    data-toggle="modal" data-target="#modalAddUser">
+                                                    data-toggle="modal" data-target="#modalEditUser">
                                                     Ubah Data
                                                 </a></span>
                                             @if ($item->email == Auth::user()->email)
@@ -178,6 +178,78 @@
                             <label for="alamat">Alamat</label>
                             <textarea class="form-control form-control-sm" id="alamat" rows="2" required name="alamat"></textarea>
                         </div>
+                        <div class="modal-footer">
+                            <button type="button" class="btn btn-secondary" data-dismiss="modal">Keluar</button>
+                            <button type="submit" class="btn btn-primary" :class="same ? '' : 'disabled'">Tambah
+                                User</button>
+                        </div>
+                    </form>
+                </div>
+            </div>
+        </div>
+    </div>
+    <div class="modal fade" id="modalEditUser" tabindex="-1" aria-labelledby="ModalTambahUser" aria-hidden="true">
+        <div class="modal-dialog modal-lg">
+            <div class="modal-content">
+                <div class="modal-header">
+                    <h1 class="modal-title fs-5" id="exampleModalLabel">Edit User - {{ Auth::user()->name }}</h1>
+                    <button type="button" class="btn-close" data-dismiss="modal" aria-label="Close"></button>
+                </div>
+                <div class="container" x-data="dataPassword">
+                    <form action="{{ route('user.add') }}" method="POST">
+                        @csrf
+                        <div class="row my-3">
+                            <div class="col-6">
+                                <label class="form-label">Nama</label>
+                                <input type="nama" class="form-control form-control-sm" name="name" required>
+                            </div>
+                            <div class="col-6">
+                                <label class="form-label">Tanggal Lahir</label>
+                                <input type="text" class="form-control form-control-sm" name="tanggal_lahir"
+                                    placeholder="--/--/----" onfocus="(this.type='date')" required>
+                            </div>
+                        </div>
+                        <div class="row mb-3 pb-3">
+                            <div class="col-6">
+                                <label class="form-label">No. Telp</label>
+                                <input type="text" class="form-control form-control-sm" name="no_telp"
+                                    placeholder="08XX XX..." required>
+                            </div>
+                            <div class="col-6">
+                                <label for="exampleInputLevel" class="form-label">Jenis Kelamin: </label><br>
+                                <div class="form-check form-check-inline">
+                                    <input class="form-check-input" type="radio" name="jenis_kelamin" id="laki-laki"
+                                        value="L" required>
+                                    <label class="form-check-label" for="laki-laki">Laki-laki</label>
+                                </div>
+                                <div class="form-check form-check-inline">
+                                    <input class="form-check-input" type="radio" name="jenis_kelamin" id="perempuan"
+                                        value="P" required>
+                                    <label class="form-check-label" for="perempuan">Perempuan</label>
+                                </div>
+                            </div>
+                        </div>
+                        <div class="form-group mb-3 ">
+                            <label for="alamat">Alamat</label>
+                            <textarea class="form-control form-control-sm" id="alamat" rows="2" required name="alamat"></textarea>
+                        </div>
+                        <div class="row mb-3">
+                            <div class="col-6">
+                                <label for="exampleInputPassword" class="form-label">Password</label>
+                                <input type="password" class="form-control form-control-sm" name="password" required
+                                    x-model="password">
+                            </div>
+                            <div class="col-6">
+                                <label for="exampleInputPassword" class="form-label">Ulang Password - <span
+                                        :class="same ? 'text-success' : 'text-danger'"
+                                        x-text="same ? 'Password Correct' : 'Password Wrong'"></span></label>
+                                <input type="password" class="form-control form-control-sm" name="repeat" required
+                                    x-model="repeat">
+                            </div>
+                            <span id="passwordHelpInline" class="form-text">
+                                Must be 8 characters or long.
+                            </span>
+                        </div>  
                         <div class="modal-footer">
                             <button type="button" class="btn btn-secondary" data-dismiss="modal">Keluar</button>
                             <button type="submit" class="btn btn-primary" :class="same ? '' : 'disabled'">Tambah
