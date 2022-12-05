@@ -9,7 +9,7 @@
         @endif
         @if ($errors->any())
             <div class="alert alert-danger" role="alert">
-                Ada Kesalahan Saat Menyimpan Obat..!! - (lihat Note Dibawah)
+                Ada Kesalahan Saat Menyimpan Kategori..!! - (lihat Note Dibawah)
             </div>
         @endif
         @if (session()->has('success'))
@@ -25,86 +25,155 @@
         <!-- DataTales Example -->
         <div class="card shadow mb-3">
             <div class="card-header py-3">
-                <h5 class="m-0 font-weight-bold text-primary">Data Obat-obatan</h5>
+                <h5 class="m-0 font-weight-bold text-primary">Data Kategori</h5>
             </div>
 
             <div class="card-body">
-                <div class="mb-3"><a class="btn btn-primary btn-sm" role="button" href="#" data-toggle="modal"
-                        data-target="#modalAddObat">
-                        Tambah Obat
-                    </a></div>
-                <!-- tables -->
-                <div class="table-responsive">
-                    <table class="table table-sm" id="dataTable" width="100%">
-                        <thead>
-                            <tr>
-                                <th scope="col">No</th>
-                                <th scope="col">Nama</th>
-                                <th scope="col">jenis</th>
-                                <th scope="col">Kategori</th>
-                                <th scope="col">Supplier</th>
-                                <th scope="col">Stok</th>
-                                <th scope="col">Harga Beli</th>
-                                <th scope="col">Harga Jual</th>
-                                <th scope="col">Aksi</th>
-                            </tr>
-                        </thead>
+                <div class="mb-3">
+                    <form action="{{ route('kategori.add') }}" method="post">
+                        @csrf
+                        <div class="row mb-2" style="width:88%">
+                            <div class="col-2" style="vertical-align: middle">Nama Kategori
+                            </div>
+                            <div class="col-7">
+                                <input type="Username" class="form-control form-control-sm" name="nama" required>
+                            </div>
+                            <div class="col-3">
+                                <button type="submit" class="btn btn-primary btn-sm">Tambah Kategori</button>
+                            </div>
+                        </div>
 
-                        <tbody>
-                            @foreach ($obat as $item)
-                                <tr>
-                                    <td scope="row">{{ $loop->iteration }}</td>
-                                    <td>{{ $item->nama }}</td>
-                                    <td>{{ $item->jenis }}</td>
-                                    <td>{{ $item->kategori->nama }}</td>
-                                    <td>{{ $item->supplier->nama }}</td>
-                                    <td>{{ number_format($item->stok, 0, ',', '.') }}</td>
-                                    <td>{{ number_format($item->harga_beli, 0, ',', '.') }}</td>
-                                    <td>{{ number_format($item->harga_jual, 0, ',', '.') }}</td>
-                                    <td style="vertical-align: middle">
-                                        <div style="display: flex; gap:0.5rem; justify-content: start;">
-                                            <span class="badge text-bg-primary p-2"><a
-                                                    style="text-decoration: none; color:white" role="button" href="#"
-                                                    data-toggle="modal" data-target="#modalEditUser{{ $item->id }}">
-                                                    <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16"
-                                                        fill="currentColor" class="bi bi-pencil-square" viewBox="0 0 16 16">
-                                                        <path
-                                                            d="M15.502 1.94a.5.5 0 0 1 0 .706L14.459 3.69l-2-2L13.502.646a.5.5 0 0 1 .707 0l1.293 1.293zm-1.75 2.456-2-2L4.939 9.21a.5.5 0 0 0-.121.196l-.805 2.414a.25.25 0 0 0 .316.316l2.414-.805a.5.5 0 0 0 .196-.12l6.813-6.814z" />
-                                                        <path fill-rule="evenodd"
-                                                            d="M1 13.5A1.5 1.5 0 0 0 2.5 15h11a1.5 1.5 0 0 0 1.5-1.5v-6a.5.5 0 0 0-1 0v6a.5.5 0 0 1-.5.5h-11a.5.5 0 0 1-.5-.5v-11a.5.5 0 0 1 .5-.5H9a.5.5 0 0 0 0-1H2.5A1.5 1.5 0 0 0 1 2.5v11z" />
-                                                    </svg> Edit
-                                                </a></span><a style="text-decoration: none; color:white" role="button"
-                                                href="{{ route('obat.delete', [$item->id]) }}"
-                                                onclick="return confirm('Apakah Anda Mau Hapus Data Ini?')"
-                                                data-id="{{ $item->id }}"><span class="badge text-bg-danger p-2"><svg
-                                                        xmlns="http://www.w3.org/2000/svg" width="16" height="16"
-                                                        fill="currentColor" class="bi bi-trash3" viewBox="0 0 16 16">
-                                                        <path
-                                                            d="M6.5 1h3a.5.5 0 0 1 .5.5v1H6v-1a.5.5 0 0 1 .5-.5ZM11 2.5v-1A1.5 1.5 0 0 0 9.5 0h-3A1.5 1.5 0 0 0 5 1.5v1H2.506a.58.58 0 0 0-.01 0H1.5a.5.5 0 0 0 0 1h.538l.853 10.66A2 2 0 0 0 4.885 16h6.23a2 2 0 0 0 1.994-1.84l.853-10.66h.538a.5.5 0 0 0 0-1h-.995a.59.59 0 0 0-.01 0H11Zm1.958 1-.846 10.58a1 1 0 0 1-.997.92h-6.23a1 1 0 0 1-.997-.92L3.042 3.5h9.916Zm-7.487 1a.5.5 0 0 1 .528.47l.5 8.5a.5.5 0 0 1-.998.06L5 5.03a.5.5 0 0 1 .47-.53Zm5.058 0a.5.5 0 0 1 .47.53l-.5 8.5a.5.5 0 1 1-.998-.06l.5-8.5a.5.5 0 0 1 .528-.47ZM8 4.5a.5.5 0 0 1 .5.5v8.5a.5.5 0 0 1-1 0V5a.5.5 0 0 1 .5-.5Z" />
-                                                    </svg>
-                                                    Hapus</a></span>
-                                        </div>
-                                    </td>
-                                </tr>
-                            @endforeach
-                        </tbody>
-                    </table>
+                    </form>
+                </div>
+                <!-- tables -->
+                <div class="row">
+                    <div class="col-6">
+                        <div class="table-responsive">
+                            <table class="table table-sm" id="dataTable" width="100%">
+                                <thead>
+                                    <tr>
+                                        <th scope="col">No</th>
+                                        <th scope="col">Nama Kategori</th>
+                                        <th scope="col">Aksi</th>
+                                    </tr>
+                                </thead>
+
+                                <tbody>
+                                    @foreach ($kategori as $item)
+                                        @if ($loop->iteration <= 5)
+                                            <tr>
+                                                <td scope="row">
+                                                    {{ request()->page != null ? $loop->iteration + request()->page * 10 - 10 : $loop->iteration + request()->page * 10 }}
+                                                </td>
+                                                <td>{{ $item->nama }}</td>
+                                                <td style="vertical-align: middle">
+                                                    <div style="display: flex; gap:0.5rem; justify-content: start;">
+                                                        {{-- <span class="badge text-bg-primary p-2">
+                                                            <a style="text-decoration: none; color:white" role="button"
+                                                                href="#" data-toggle="modal"
+                                                                data-target="#modalEditUser{{ $item->id }}">
+                                                                <svg xmlns="http://www.w3.org/2000/svg" width="16"
+                                                                    height="16" fill="currentColor"
+                                                                    class="bi bi-pencil-square" viewBox="0 0 16 16">
+                                                                    <path
+                                                                        d="M15.502 1.94a.5.5 0 0 1 0 .706L14.459 3.69l-2-2L13.502.646a.5.5 0 0 1 .707 0l1.293 1.293zm-1.75 2.456-2-2L4.939 9.21a.5.5 0 0 0-.121.196l-.805 2.414a.25.25 0 0 0 .316.316l2.414-.805a.5.5 0 0 0 .196-.12l6.813-6.814z" />
+                                                                    <path fill-rule="evenodd"
+                                                                        d="M1 13.5A1.5 1.5 0 0 0 2.5 15h11a1.5 1.5 0 0 0 1.5-1.5v-6a.5.5 0 0 0-1 0v6a.5.5 0 0 1-.5.5h-11a.5.5 0 0 1-.5-.5v-11a.5.5 0 0 1 .5-.5H9a.5.5 0 0 0 0-1H2.5A1.5 1.5 0 0 0 1 2.5v11z" />
+                                                                </svg> Edit
+                                                            </a>
+                                                        </span> --}}
+                                                        <span><a style="text-decoration: none; color:white" role="button"
+                                                                href="{{ route('kategori.delete', [$item->id]) }}"
+                                                                onclick="return confirm('Apakah Anda Mau Hapus Data Ini?')"
+                                                                data-id="{{ $item->id }}"><span
+                                                                    class="badge text-bg-danger p-2"><svg
+                                                                        xmlns="http://www.w3.org/2000/svg" width="16"
+                                                                        height="16" fill="currentColor"
+                                                                        class="bi bi-trash3" viewBox="0 0 16 16">
+                                                                        <path
+                                                                            d="M6.5 1h3a.5.5 0 0 1 .5.5v1H6v-1a.5.5 0 0 1 .5-.5ZM11 2.5v-1A1.5 1.5 0 0 0 9.5 0h-3A1.5 1.5 0 0 0 5 1.5v1H2.506a.58.58 0 0 0-.01 0H1.5a.5.5 0 0 0 0 1h.538l.853 10.66A2 2 0 0 0 4.885 16h6.23a2 2 0 0 0 1.994-1.84l.853-10.66h.538a.5.5 0 0 0 0-1h-.995a.59.59 0 0 0-.01 0H11Zm1.958 1-.846 10.58a1 1 0 0 1-.997.92h-6.23a1 1 0 0 1-.997-.92L3.042 3.5h9.916Zm-7.487 1a.5.5 0 0 1 .528.47l.5 8.5a.5.5 0 0 1-.998.06L5 5.03a.5.5 0 0 1 .47-.53Zm5.058 0a.5.5 0 0 1 .47.53l-.5 8.5a.5.5 0 1 1-.998-.06l.5-8.5a.5.5 0 0 1 .528-.47ZM8 4.5a.5.5 0 0 1 .5.5v8.5a.5.5 0 0 1-1 0V5a.5.5 0 0 1 .5-.5Z" />
+                                                                    </svg>
+                                                                    Hapus</a></span>
+                                                    </div>
+                                                </td>
+                                            </tr>
+                                        @endif
+                                    @endforeach
+                                </tbody>
+                            </table>
+                        </div>
+                    </div>
+                    <div class="col-6">
+                        <div class="table-responsive">
+                            <table class="table table-sm" id="dataTable" width="100%">
+                                <thead>
+                                    <tr>
+                                        <th scope="col">No</th>
+                                        <th scope="col">Nama Kategori</th>
+                                        <th scope="col">Aksi</th>
+                                    </tr>
+                                </thead>
+
+                                <tbody>
+                                    @foreach ($kategori as $item)
+                                        @if ($loop->iteration > 5)
+                                            <tr>
+                                                <td scope="row">
+                                                    {{ request()->page != null ? $loop->iteration + request()->page * 10 - 10 : $loop->iteration + request()->page * 10 }}
+                                                </td>
+                                                <td>{{ $item->nama }}</td>
+                                                <td style="vertical-align: middle">
+                                                    <div style="display: flex; gap:0.5rem; justify-content: start;">
+                                                        <span class="badge text-bg-primary p-2"><a
+                                                                style="text-decoration: none; color:white" role="button"
+                                                                href="#" data-toggle="modal"
+                                                                data-target="#modalEditUser{{ $item->id }}">
+                                                                <svg xmlns="http://www.w3.org/2000/svg" width="16"
+                                                                    height="16" fill="currentColor"
+                                                                    class="bi bi-pencil-square" viewBox="0 0 16 16">
+                                                                    <path
+                                                                        d="M15.502 1.94a.5.5 0 0 1 0 .706L14.459 3.69l-2-2L13.502.646a.5.5 0 0 1 .707 0l1.293 1.293zm-1.75 2.456-2-2L4.939 9.21a.5.5 0 0 0-.121.196l-.805 2.414a.25.25 0 0 0 .316.316l2.414-.805a.5.5 0 0 0 .196-.12l6.813-6.814z" />
+                                                                    <path fill-rule="evenodd"
+                                                                        d="M1 13.5A1.5 1.5 0 0 0 2.5 15h11a1.5 1.5 0 0 0 1.5-1.5v-6a.5.5 0 0 0-1 0v6a.5.5 0 0 1-.5.5h-11a.5.5 0 0 1-.5-.5v-11a.5.5 0 0 1 .5-.5H9a.5.5 0 0 0 0-1H2.5A1.5 1.5 0 0 0 1 2.5v11z" />
+                                                                </svg> Edit
+                                                            </a></span><a style="text-decoration: none; color:white"
+                                                            role="button"
+                                                            href="{{ route('kategori.delete', [$item->id]) }}"
+                                                            onclick="return confirm('Apakah Anda Mau Hapus Data Ini?')"
+                                                            data-id="{{ $item->id }}"><span
+                                                                class="badge text-bg-danger p-2"><svg
+                                                                    xmlns="http://www.w3.org/2000/svg" width="16"
+                                                                    height="16" fill="currentColor" class="bi bi-trash3"
+                                                                    viewBox="0 0 16 16">
+                                                                    <path
+                                                                        d="M6.5 1h3a.5.5 0 0 1 .5.5v1H6v-1a.5.5 0 0 1 .5-.5ZM11 2.5v-1A1.5 1.5 0 0 0 9.5 0h-3A1.5 1.5 0 0 0 5 1.5v1H2.506a.58.58 0 0 0-.01 0H1.5a.5.5 0 0 0 0 1h.538l.853 10.66A2 2 0 0 0 4.885 16h6.23a2 2 0 0 0 1.994-1.84l.853-10.66h.538a.5.5 0 0 0 0-1h-.995a.59.59 0 0 0-.01 0H11Zm1.958 1-.846 10.58a1 1 0 0 1-.997.92h-6.23a1 1 0 0 1-.997-.92L3.042 3.5h9.916Zm-7.487 1a.5.5 0 0 1 .528.47l.5 8.5a.5.5 0 0 1-.998.06L5 5.03a.5.5 0 0 1 .47-.53Zm5.058 0a.5.5 0 0 1 .47.53l-.5 8.5a.5.5 0 1 1-.998-.06l.5-8.5a.5.5 0 0 1 .528-.47ZM8 4.5a.5.5 0 0 1 .5.5v8.5a.5.5 0 0 1-1 0V5a.5.5 0 0 1 .5-.5Z" />
+                                                                </svg>
+                                                                Hapus</a></span>
+                                                    </div>
+                                                </td>
+                                            </tr>
+                                        @endif
+                                    @endforeach
+                                </tbody>
+                            </table>
+                        </div>
+                    </div>
                     @if ($errors->any())
-                        <div>Note: Error Saat Ingin Menambahkan/Mengedit Obat..<ol>
+                        <div>Note: Error Saat Ingin Menambahkan/Mengedit Kategori..<ol>
                                 @foreach ($errors->all() as $error)
                                     <li class="text-danger">{{ $error }}</li>
                                 @endforeach
                             </ol>
                         </div>
                     @endif
-                    {{ $obat->links() }}
+                    {{ $kategori->links() }}
                 </div>
             </div>
         </div>
     </div>
 @endsection
 @section('Modal')
-    <div class="modal fade" id="modalAddObat" tabindex="-1" aria-labelledby="ModalTambahUser" aria-hidden="true">
+    {{-- <div class="modal fade" id="modalAddObat" tabindex="-1" aria-labelledby="ModalTambahUser" aria-hidden="true">
         <div class="modal-dialog modal-lg">
             <div class="modal-content">
                 <div class="modal-header">
@@ -286,7 +355,7 @@
                                         <option disabled>Pilih Kategori</option>
                                         @foreach ($kategori as $i)
                                             <option value="{{ $i->id }}"
-                                                {{ $i->id === $item->kategori_id ? 'selected' : '' }}>{{ $i->nama }}
+                                                {{ $i->id === $item->ketegori ? 'selected' : '' }}>{{ $i->nama }}
                                             </option>
                                         @endforeach
                                     </select>
@@ -297,7 +366,7 @@
                                         <option disabled>Pilih Supplier</option>
                                         @foreach ($supplier as $i)
                                             <option value="{{ $i->id }}"
-                                                {{ $i->id === $item->supplier_id ? 'selected' : '' }}>{{ $i->nama }}
+                                                {{ $i->id === $item->supplier ? 'selected' : '' }}>{{ $i->nama }}
                                             </option>
                                         @endforeach
                                     </select>
@@ -387,7 +456,7 @@
                 </div>
             </div>
         </div>
-    @endforeach
+    @endforeach --}}
 @endsection
 @push('style')
     <style></style>
@@ -403,7 +472,7 @@
 
     <!-- Custom scripts for all pages-->
     <script src={{ URL::asset('template/js/sb-admin-2.min.js') }}></script>
-    <script>
+    {{-- <script>
         document.addEventListener('alpine:init', () => {
             Alpine.data('tambahObat', () => ({
                 ppn: 11,
@@ -434,5 +503,5 @@
                 }));
             @endforeach
         })
-    </script>
+    </script> --}}
 @endpush

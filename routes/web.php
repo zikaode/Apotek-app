@@ -12,6 +12,7 @@ use App\Http\Controllers\TestController;
 use App\Http\Controllers\UserController;
 use App\Http\Controllers\DashboardController;
 use Illuminate\Support\Facades\Redirect;
+use App\Http\Controllers\KategoriController;
 use App\Http\Controllers\PengaturanController;
 
 /*
@@ -91,6 +92,18 @@ Route::middleware('auth')->group(function () {
         '/pengaturan/edit',
         [PengaturanController::class, 'update']
     )->name('pengaturan.edit');
+    Route::get(
+        '/kategori',
+        [KategoriController::class, 'index']
+    )->name('kategori');
+    Route::post(
+        '/kategori/add',
+        [KategoriController::class, 'store']
+    )->name('kategori.add');
+    Route::get(
+        '/kategori/{id?}/delete',
+        [KategoriController::class, 'destroy']
+    )->name('kategori.delete');
 });
 
-// Route::get('/test', [TestController::class, 'index']);
+Route::get('/test', [TestController::class, 'index']);

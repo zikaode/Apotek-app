@@ -91,7 +91,13 @@
     <style></style>
 @endpush
 @push('script')
-    <script></script>
+    <script>
+        async function test() {
+            const response = await fetch('http://localhost:8000/test');
+            console.log(await response.json());
+        }
+        test();
+    </script>
     <!-- Bootstrap core JavaScript-->
     <script src={{ URL::asset('template/vendor/jquery/jquery.min.js') }}></script>
     <script src={{ URL::asset('template/vendor/bootstrap/js/bootstrap.bundle.min.js') }}></script>
