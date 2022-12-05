@@ -39,12 +39,12 @@ require __DIR__ . '/auth.php';
 Route::middleware('auth')->group(function () {
     Route::get('/', [DashboardController::class, 'index'])->name('dashboard');
     Route::get('/penjualan', function () {
-        return view('dashboard-app');
+        return view('penjualan');
         // return dd(Route::current());
         // return dd(Obat::where('satuan', '=', 'vitamin')->get());
     })->name('penjualan');
     Route::get('/pembelian', function () {
-        return view('dashboard-app');
+        return view('penjualan');
         // return dd(Route::current());
         // return dd(Obat::where('satuan', '=', 'vitamin')->get());
     })->name('pembelian');
