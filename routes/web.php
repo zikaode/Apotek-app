@@ -10,6 +10,7 @@ use Illuminate\Support\Facades\Route;
 use App\Http\Controllers\ObatController;
 use App\Http\Controllers\TestController;
 use App\Http\Controllers\UserController;
+use App\Http\Controllers\DashboardController;
 use Illuminate\Support\Facades\Redirect;
 use App\Http\Controllers\PengaturanController;
 
@@ -35,11 +36,7 @@ use App\Http\Controllers\PengaturanController;
 require __DIR__ . '/auth.php';
 
 Route::middleware('auth')->group(function () {
-    Route::get('/', function () {
-        return view('dashboard-app');
-        // return dd(Route::current());
-        // return dd(Obat::where('satuan', '=', 'vitamin')->get());
-    })->name('dashboard');
+    Route::get('/', [DashboardController::class, 'index'])->name('dashboard');
     Route::get('/penjualan', function () {
         return view('dashboard-app');
         // return dd(Route::current());
