@@ -14,6 +14,12 @@ class DashboardController extends Controller
         $supplier = Supplier::all();
         $jumlah_obat = count($obat);
         $jumlah_supplier = count($supplier);
-        return view('dashboard-app')->with(['jumlah_obat'=>$jumlah_obat, 'jumlah_supplier'=> $jumlah_supplier]);
+        $expired = 0;
+        foreach ($obat as $item) {
+            if (strtotime($item->expired) < strtotime("now")) {
+                $expired += 1;
+            }
+        }
+        return view('dashboard-app')->with(['jumlah_obat'=>$jumlah_obat, 'jumlah_supplier'=> $jumlah_supplier, 'expired' => $expired]);
     }
 }
