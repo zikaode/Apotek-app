@@ -14,6 +14,7 @@ class Penjualan extends Model
         'total_harga',
         'total_bayar',
         'kembalian',
+        'user_id'
     ];
     public function user()
     {

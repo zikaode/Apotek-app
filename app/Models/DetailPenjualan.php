@@ -14,6 +14,8 @@ class DetailPenjualan extends Model
         'sub_total',
         'harga_beli',
         'harga_jual',
+        'obat_id',
+        'penjualan_id'
     ];
     public function penjualan()
     {

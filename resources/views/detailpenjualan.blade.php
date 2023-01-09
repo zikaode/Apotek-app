@@ -25,54 +25,35 @@
         <!-- DataTales Example -->
         <div class="card shadow mb-3">
             <div class="card-header py-3">
-                <h5 class="m-0 font-weight-bold text-primary">Data Penjualan</h5>
+                <h5 class="m-0 font-weight-bold text-primary">Data Penjualan - {{ $penjualan->id }}</h5>
             </div>
 
             <div class="card-body">
-                <div class="mb-3"><a class="btn btn-primary btn-sm" href="{{ route('penjualan.kasir') }}">
-                        Tambah Penjualan - Kasir
-                    </a></div>
+                <div class="mb-3">
+                    <h5 style="text-align: right">Tanggal : {{ $penjualan->created_at }}</h5>
+                    <h5 style="text-align: right; font-weight: bold; text-decoration: underline">
+                        {{ $penjualan->user->name }}</h5>
+                    <hr>
+                    <h5>Costumer : {{ $penjualan->costumer }}</h5>
+                </div>
                 <!-- tables -->
                 <div class="table-responsive">
                     <table class="table table-sm" id="dataTable" width="100%">
                         <thead>
                             <tr>
                                 <th scope="col">No</th>
-                                <th scope="col">Tanggal</th>
-                                <th scope="col">Costumer</th>
-                                <th scope="col">Seller</th>
-                                <th scope="col">Total Bayar</th>
-                                <th scope="col">Total Harga</th>
-                                <th scope="col">Kembalian</th>
-                                <th scope="col">Aksi</th>
+                                <th scope="col">Obat</th>
+                                <th scope="col">Jumlah</th>
+                                <th scope="col">SubTotal</th>
                             </tr>
                         </thead>
-
                         <tbody>
-                            @foreach ($penjualan as $item)
+                            @foreach ($penjualan->detail_penjualan as $item)
                                 <tr>
                                     <td scope="row">{{ $loop->iteration }}</td>
-                                    <td>{{ $item->created_at }}</td>
-                                    <td>{{ $item->costumer }}</td>
-                                    <td>{{ $item->user->name }}</td>
-                                    <td>{{ number_format($item->total_bayar, 0, ',', '.') }}</td>
-                                    <td>{{ number_format($item->total_harga, 0, ',', '.') }}</td>
-                                    <td>{{ number_format($item->kembalian, 0, ',', '.') }}</td>
-                                    <td style="vertical-align: middle">
-                                        <div style="display: flex; gap:0.5rem; justify-content: start;">
-                                            <span class="badge text-bg-primary p-2"><a
-                                                    style="text-decoration: none; color:white" role="button"
-                                                    href="{{ route('penjualan.bukti', $item->id) }}">
-                                                    <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16"
-                                                        fill="currentColor" class="bi bi-pencil-square" viewBox="0 0 16 16">
-                                                        <path
-                                                            d="M15.502 1.94a.5.5 0 0 1 0 .706L14.459 3.69l-2-2L13.502.646a.5.5 0 0 1 .707 0l1.293 1.293zm-1.75 2.456-2-2L4.939 9.21a.5.5 0 0 0-.121.196l-.805 2.414a.25.25 0 0 0 .316.316l2.414-.805a.5.5 0 0 0 .196-.12l6.813-6.814z" />
-                                                        <path fill-rule="evenodd"
-                                                            d="M1 13.5A1.5 1.5 0 0 0 2.5 15h11a1.5 1.5 0 0 0 1.5-1.5v-6a.5.5 0 0 0-1 0v6a.5.5 0 0 1-.5.5h-11a.5.5 0 0 1-.5-.5v-11a.5.5 0 0 1 .5-.5H9a.5.5 0 0 0 0-1H2.5A1.5 1.5 0 0 0 1 2.5v11z" />
-                                                    </svg> Detail
-                                                </a></span>
-                                        </div>
-                                    </td>
+                                    <td>{{ $item->obat->nama }}</td>
+                                    <td>{{ $item->jumlah }}</td>
+                                    <td>Rp. {{ number_format($item->sub_total, 0, ',', '.') }}</td>
                                 </tr>
                             @endforeach
                         </tbody>
@@ -86,6 +67,36 @@
                         </div>
                     @endif
                     {{-- {{ $obat->links() }} --}}
+                </div>
+            </div>
+            <div class="card-footer">
+                <div class="mb-3 float-right">
+                    <table style="font-size: 1.15rem; text-align: right">
+                        <tr>
+                            <td>Total Harga</td>
+                            <td> : </td>
+                            <td>
+                                <h6 style="visibility: hidden">0</h6>
+                            </td>
+                            <td><strong>Rp. {{ number_format($penjualan->total_harga, 0, ',', '.') }}</strong> </td>
+                        </tr>
+                        <tr>
+                            <td>Total Bayar</td>
+                            <td> : </td>
+                            <td>
+                                <h6 style="visibility: hidden">0</h6>
+                            </td>
+                            <td><strong>Rp. {{ number_format($penjualan->total_bayar, 0, ',', '.') }}</strong>
+                        </tr>
+                        <tr>
+                            <td>kembalian</td>
+                            <td> : </td>
+                            <td>
+                                <h6 style="visibility: hidden">0</h6>
+                            </td>
+                            <td><strong>Rp. {{ number_format($penjualan->kembalian, 0, ',', '.') }}</strong>
+                        </tr>
+                    </table>
                 </div>
             </div>
         </div>

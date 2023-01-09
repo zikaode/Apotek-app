@@ -8,12 +8,14 @@ use App\Models\UserProfile;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Route;
 use App\Http\Controllers\ObatController;
-use App\Http\Controllers\TestController;
 use App\Http\Controllers\UserController;
-use App\Http\Controllers\DashboardController;
 use Illuminate\Support\Facades\Redirect;
 use App\Http\Controllers\KategoriController;
+use App\Http\Controllers\DashboardController;
+use App\Http\Controllers\PembelianController;
+use App\Http\Controllers\PenjualanController;
 use App\Http\Controllers\PengaturanController;
+use App\Http\Controllers\SupplierController;
 
 /*
 |--------------------------------------------------------------------------
@@ -38,16 +40,37 @@ require __DIR__ . '/auth.php';
 
 Route::middleware('auth')->group(function () {
     Route::get('/', [DashboardController::class, 'index'])->name('dashboard');
-    Route::get('/penjualan', function () {
-        return view('penjualan');
-        // return dd(Route::current());
-        // return dd(Obat::where('satuan', '=', 'vitamin')->get());
-    })->name('penjualan');
-    Route::get('/pembelian', function () {
-        return view('penjualan');
-        // return dd(Route::current());
-        // return dd(Obat::where('satuan', '=', 'vitamin')->get());
-    })->name('pembelian');
+    Route::get('/penjualan', [PenjualanController::class, 'index'])->name('penjualan');
+    Route::get('/penjualan/kasir', [PenjualanController::class, 'create'])->name('penjualan.kasir');
+    Route::get('/penjualan/kasirmin/{id}', [PenjualanController::class, 'min'])->name('kasir.min');
+    Route::get('/penjualan/kasirdel/{id}', [PenjualanController::class, 'del'])->name('kasir.del');
+    Route::get('/pembelian', [PembelianController::class, 'index'])->name('pembelian');
+    Route::get('/penjualan/bukti/{id}', [PenjualanController::class, 'bukti'])->name('penjualan.bukti');
+    Route::post('penjualan/add', [PenjualanController::class, 'add'])->name('kasir.add');
+    Route::post('penjualan/transaksi', [PenjualanController::class, 'transaksi'])->name('kasir.transaksi');
+    Route::get('supplier', [SupplierController::class, 'index'])->name('supplier');
+    Route::post(
+        '/supplier/add',
+        [SupplierController::class, 'store']
+    )->name('supplier.add');
+    Route::post(
+        '/supplier/{supplier}/edit',
+        [SupplierController::class, 'update']
+    )->name('supplier.update');
+    Route::get(
+        '/supplier/{id?}/delete',
+        [SupplierController::class, 'destroy']
+    )->name('supplier.delete');
+    Route::get('penjualan/reset', function () {
+        session()->forget('kasir');
+        return redirect(route('penjualan.kasir'));
+    })->name('kasir.reset');
+    Route::get('penjualan/add', function () {
+        return redirect(route('penjualan.kasir'));
+    })->name('kasir.add.redirect');
+    Route::get('penjualan/transaksi', function () {
+        return redirect(route('penjualan.kasir'));
+    })->name('kasir.transaksi.redirect');
     Route::get(
         '/user',
         [UserController::class, 'index']
@@ -105,5 +128,3 @@ Route::middleware('auth')->group(function () {
         [KategoriController::class, 'destroy']
     )->name('kategori.delete');
 });
-
-Route::get('/test', [TestController::class, 'index']);

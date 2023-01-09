@@ -4,10 +4,11 @@ namespace Database\Seeders;
 
 // use Illuminate\Database\Console\Seeds\WithoutModelEvents;
 
+use App\Models\User;
 use App\Models\Apotek;
 use App\Models\Kategori;
 use App\Models\Supplier;
-use App\Models\User;
+use App\Models\Penjualan;
 use App\Models\UserProfile;
 use Illuminate\Support\Str;
 use Illuminate\Database\Seeder;
@@ -57,6 +58,14 @@ class DatabaseSeeder extends Seeder
         // ]);
 
         // \App\Models\Obat::factory(10)->create();
-        \App\Models\Kategori::factory(30)->create();
+        // \App\Models\Kategori::factory(30)->create();
+
+        Penjualan::create([
+            'costumer' => 'Apotek Dzikri',
+            'total_harga' => '80000',
+            'total_bayar' => '100000',
+            'kembalian' => '20000',
+            'user_id' => 1
+        ]);
     }
 }

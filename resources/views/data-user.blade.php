@@ -249,7 +249,7 @@
                             <span id="passwordHelpInline" class="form-text">
                                 Must be 8 characters or long.
                             </span>
-                        </div>  
+                        </div>
                         <div class="modal-footer">
                             <button type="button" class="btn btn-secondary" data-dismiss="modal">Keluar</button>
                             <button type="submit" class="btn btn-primary" :class="same ? '' : 'disabled'">Tambah
