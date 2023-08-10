@@ -39,11 +39,11 @@
                         <thead>
                             <tr>
                                 <th scope="col">No</th>
-                                <th scope="col">Costumer</th>
-                                <th scope="col">Seller</th>
-                                <th scope="col">Total Bayar</th>
-                                <th scope="col">Total Harga</th>
-                                <th scope="col">Kembalian</th>
+                                <th scope="col">Supplier</th>
+                                <th scope="col">Harga Beli</th>
+                                <th scope="col">Harga Jual</th>
+                                <th scope="col">Selisih</th>
+                                <th scope="col">Apoteker</th>
                                 <th scope="col">Aksi</th>
                             </tr>
                         </thead>
@@ -52,11 +52,11 @@
                             @foreach ($pembelian as $item)
                                 <tr>
                                     <td scope="row">{{ $loop->iteration }}</td>
-                                    <td>{{ $item->costumer }}</td>
+                                    <td>{{ $item->supplier->nama }}</td>
+                                    <td>{{ number_format($item->harga_beli, 0, ',', '.') }}</td>
+                                    <td>{{ number_format($item->harga_jual, 0, ',', '.') }}</td>
+                                    <td>{{ number_format($item->selisih, 0, ',', '.') }}</td>
                                     <td>{{ $item->user->name }}</td>
-                                    <td>{{ number_format($item->total_bayar, 0, ',', '.') }}</td>
-                                    <td>{{ number_format($item->total_harga, 0, ',', '.') }}</td>
-                                    <td>{{ number_format($item->kembalian, 0, ',', '.') }}</td>
                                     <td style="vertical-align: middle">
                                         {{-- <div style="display: flex; gap:0.5rem; justify-content: start;">
                                             <span class="badge text-bg-primary p-2"><a

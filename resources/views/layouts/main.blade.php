@@ -88,7 +88,7 @@
                         <!-- <h6 class="collapse-header">Custom Components:</h6> -->
                         <a class="collapse-item {{ Route::current()->action['as'] == 'obat' ? 'active text-danger' : '' }}"
                             href="{{ route('obat') }}">Data Obat</a>
-                        <a class="collapse-item" href="#">Data Supplier</a>
+                        <a class="collapse-item" href="{{ route('supplier') }}">Data Supplier</a>
                         <a class="collapse-item" href="{{ route('kategori') }}">Data Kategori</a>
                     </div>
                 </div>

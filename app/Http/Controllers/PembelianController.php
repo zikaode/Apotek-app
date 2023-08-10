@@ -15,6 +15,7 @@ class PembelianController extends Controller
     public function index()
     {
         $pembelian = Pembelian::paginate(10);
+        // return dd($pembelian);
         return view('pembelian', ['pembelian' => $pembelian]);
     }
 

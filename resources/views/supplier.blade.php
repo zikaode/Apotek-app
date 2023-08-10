@@ -42,6 +42,7 @@
                                 <th scope="col">Nama</th>
                                 <th scope="col">Alamat</th>
                                 <th scope="col">No Telephone</th>
+                                <th scope="col">Terhutang</th>
                                 <th scope="col">Aksi</th>
                             </tr>
                         </thead>
@@ -53,6 +54,7 @@
                                     <td>{{ $item->nama }}</td>
                                     <td>{{ $item->alamat }}</td>
                                     <td>{{ $item->no_telp }}</td>
+                                    <td>Rp. {{ $item->hutang }}</td>
                                     <td style="vertical-align: middle">
                                         <div style="display: flex; gap:0.5rem; justify-content: start;">
                                             {{-- <span class="badge text-bg-primary p-2"><a
@@ -66,8 +68,7 @@
                                                             d="M1 13.5A1.5 1.5 0 0 0 2.5 15h11a1.5 1.5 0 0 0 1.5-1.5v-6a.5.5 0 0 0-1 0v6a.5.5 0 0 1-.5.5h-11a.5.5 0 0 1-.5-.5v-11a.5.5 0 0 1 .5-.5H9a.5.5 0 0 0 0-1H2.5A1.5 1.5 0 0 0 1 2.5v11z" />
                                                     </svg> Edit
                                                 </a></span> --}}<a style="text-decoration: none; color:white"
-                                                role="button" href="{{ route('supplier.delete', [$item->id]) }}"
-                                                onclick="return confirm('Apakah Anda Mau Hapus Data Ini?')"
+                                                role="button" {{-- href="{{ route('supplier.delete', [$item->id]) }}" --}} {{-- onclick="return confirm('Apakah Anda Mau Hapus Data Ini?')" --}}
                                                 data-id="{{ $item->id }}"><span class="badge text-bg-danger p-2"><svg
                                                         xmlns="http://www.w3.org/2000/svg" width="16" height="16"
                                                         fill="currentColor" class="bi bi-trash3" viewBox="0 0 16 16">
@@ -96,7 +97,7 @@
     </div>
 @endsection
 @section('Modal')
-    <div class="modal fade" id="modalAddObat" tabindex="-1" aria-labelledby="ModalTambahUser" aria-hidden="true">
+    {{-- <div class="modal fade" id="modalAddObat" tabindex="-1" aria-labelledby="ModalTambahUser" aria-hidden="true">
         <div class="modal-dialog modal-lg">
             <div class="modal-content">
                 <div class="modal-header">
@@ -196,7 +197,7 @@
                 </form>
             </div>
         </div>
-    </div>
+    </div> --}}
 @endsection
 @push('style')
     <style></style>
